@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ignacio Soria — Caso 001 “El Mecanismo”</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Narrow:wght@400;600&family=Special+Elite&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f6f2f4;--line:#e3dfe3;--ink:#0a0a0a;--grey:#bdb7ab;--clay:#b98a72;--kraft:#c4a075;--old:#e9dfc8;--red:#c8102e;
+--t:"Anton","Impact","Arial Narrow",sans-serif;--b:"Archivo Narrow","Arial Narrow",Arial,sans-serif;--m:"Special Elite","Courier New",monospace;--h:"Caveat","Segoe Script",cursive}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper) repeating-linear-gradient(to bottom,transparent 0 47px,var(--line) 47px 48px);color:var(--ink);font-family:var(--b);font-size:19px;line-height:1.45;overflow-x:hidden}
+body.lock{overflow:hidden}
+a{color:inherit}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.16;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+.t{font-family:var(--t);text-transform:uppercase;letter-spacing:-.01em;line-height:.92;font-weight:400}
+.m{font-family:var(--m);font-size:14px;letter-spacing:.02em}
+.h{font-family:var(--h);font-size:26px;line-height:1;color:#1b2a4a}
+.px{transform:translate3d(0,var(--py,0px),0) rotate(var(--r,0deg));will-change:transform}
+
+/* barra */
+.bar{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;padding:12px clamp(16px,4vw,48px);font-family:var(--m);font-size:13px;pointer-events:none}
+.bar>*{pointer-events:auto}
+.bar b{background:var(--ink);color:var(--paper);padding:3px 10px;font-weight:400}
+.bar nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.bar nav a{text-decoration:none;background:var(--old);padding:3px 9px;border:1px solid #0003;transition:transform .2s}
+.bar nav a:hover{transform:translateY(-3px) rotate(-2deg);background:#fff}
+
+/* cinta */
+.tape{position:absolute;background:var(--red);color:#000;font-family:var(--t);font-size:clamp(34px,6vw,84px);white-space:nowrap;overflow:hidden;padding:.08em 0;line-height:1;letter-spacing:.02em;
+clip-path:polygon(0 8%,2% 0,4% 6%,100% 0,98% 50%,100% 100%,3% 94%,0 100%,2% 52%);box-shadow:0 6px 14px #0003;text-shadow:0 0 1px #0008}
+.tape span{opacity:.82;margin-right:.5em}
+
+/* portada */
+.cover{position:relative;min-height:100vh;padding:clamp(70px,10vh,110px) clamp(20px,6vw,100px) 90px;overflow:hidden}
+.cover h1{font-family:var(--t);font-size:clamp(22px,2.6vw,36px);font-weight:400;text-transform:uppercase;letter-spacing:-.02em;line-height:1.05;position:relative;z-index:3}
+.cover .who{margin-top:22px;font-size:clamp(22px,2.6vw,36px)}
+.cover .intro{position:relative;z-index:3;max-width:520px;margin-top:clamp(40px,12vh,130px);font-size:clamp(19px,1.9vw,25px);font-weight:600;line-height:1.15;letter-spacing:-.02em}
+.cover .intro em{font-style:normal;background:linear-gradient(transparent 60%,#c8102e55 60%)}
+.stack{position:absolute;right:clamp(10px,6vw,100px);top:22vh;width:clamp(240px,34vw,440px);height:76vh;z-index:2}
+.stack>*{position:absolute;box-shadow:0 12px 26px #0004}
+.doc{background:#e5e0d6;top:0;left:0;width:78%;height:100%;padding:14px;font-family:var(--m);font-size:11px;text-align:center}
+.doc .h{display:block;text-align:left;margin-top:30px;font-size:22px}
+.doc .ph{margin-top:22px;height:58%;border:1px dashed #0006;display:grid;place-items:center;font-family:var(--m);font-size:11px;color:#0008;padding:8px}
+.ph{display:grid;place-items:center;text-align:center;background:#d8d2c4;color:#0007;font-family:var(--m);font-size:12px;padding:10px}
+.s1{right:14%;top:8%;width:30%;height:70%;background:#c8102e}
+.s2{right:7%;top:12%;width:26%;height:66%;background:#9fcfbf}
+.s3{right:0;top:16%;width:22%;height:62%;background:#1d2a33}
+.hint{position:absolute;left:clamp(20px,6vw,100px);bottom:34px;z-index:3;font-family:var(--m);font-size:15px;display:flex;gap:12px;align-items:center}
+.hint i{display:block;width:70px;height:1px;background:var(--ink);animation:go 2.4s ease-in-out infinite;transform-origin:left}
+@keyframes go{50%{transform:scaleX(1.7)}}
+.c1{left:-5vw;bottom:9vh;width:62vw;transform:rotate(-6deg)}
+.c2{right:-8vw;top:-2vh;width:50vw;transform:rotate(8deg)}
+
+/* mecanismo */
+.sec{position:relative;padding:clamp(70px,12vh,140px) clamp(20px,6vw,100px)}
+.sec h2{font-size:clamp(46px,9vw,140px);max-width:12ch}
+.mech{position:relative;margin:50px auto 30px;max-width:1100px;aspect-ratio:1000/430;min-height:300px}
+.mech svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.mech path{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:6 7;vector-effect:non-scaling-stroke}
+.mech path.red{stroke:var(--red);stroke-width:3;stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 3s ease .3s}
+.in .mech path.red,.mech.in path.red{stroke-dashoffset:0}
+.node{position:absolute;transform:translate(-50%,-50%) rotate(var(--r));background:var(--old);padding:10px 14px 8px;box-shadow:0 8px 18px #0003;font-family:var(--t);font-size:clamp(15px,2.6vw,34px);text-transform:uppercase;opacity:0;transition:opacity .6s,margin .6s;margin-top:20px}
+.node small{display:block;font-family:var(--m);font-size:11px;text-transform:none;margin-bottom:4px}
+.mech.in .node{opacity:1;margin-top:0}
+.mech.in .node:nth-of-type(2){transition-delay:.3s}.mech.in .node:nth-of-type(3){transition-delay:.9s}.mech.in .node:nth-of-type(4){transition-delay:1.5s}.mech.in .node:nth-of-type(5){transition-delay:2.1s}.mech.in .node:nth-of-type(6){transition-delay:2.7s}
+.node.last{background:var(--ink);color:var(--paper)}
+.quote{font-size:clamp(26px,4vw,56px);font-weight:600;letter-spacing:-.03em;line-height:1;max-width:18ch;margin:40px 0 0 auto;text-align:right}
+.quote u{text-decoration-color:var(--red);text-decoration-thickness:5px;text-underline-offset:6px}
+.note{position:absolute;transform:rotate(-4deg)}
+
+/* archivo */
+.arch-wrap{max-width:1000px;margin:60px auto 0;position:relative}
+.folder{position:relative;cursor:pointer;display:block;width:100%;background:none;border:0;text-align:left;color:inherit;font:inherit;outline-offset:6px}
+.fin{position:relative;transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s;filter:drop-shadow(0 5px 7px #0003)}
+.folder:hover .fin,.folder:focus-visible .fin{transform:translateY(-14px) scale(1.012);filter:drop-shadow(0 22px 20px #0005)}
+.body{height:clamp(190px,32vw,330px);border-radius:0 18px 0 0;padding:0}
+.tab{position:absolute;bottom:100%;height:clamp(40px,6vw,70px);padding:0 clamp(18px,4vw,50px);border-radius:16px 16px 0 0;display:flex;align-items:center;font-family:var(--t);font-size:clamp(24px,4.6vw,56px);text-transform:uppercase;line-height:.95;letter-spacing:-.01em;white-space:nowrap;transition:transform .3s}
+.folder:hover .tab{transform:translateY(-4px)}
+.folder .m{position:absolute;right:20px;top:14px;opacity:.7;font-size:13px}
+.folder .arrow{position:absolute;right:30px;bottom:18px;font-size:44px;line-height:1;transition:transform .3s}
+.folder:hover .arrow{transform:translateX(10px)}
+.f1{z-index:1}.f1 .body,.f1 .tab{background:var(--grey)}.f1 .tab{left:clamp(110px,22vw,250px)}
+.f1 .body{height:clamp(230px,36vw,380px)}
+.f2{z-index:2;margin-top:clamp(-130px,-12vw,-95px);margin-left:-1.5%;width:98%;margin-top:calc(clamp(40px,6vw,70px)*-1 + clamp(-30px,-4vw,-6px))}
+.f2 .body,.f2 .tab{background:var(--clay)}.f2 .tab{left:clamp(40px,8vw,100px)}
+.f3{z-index:3;margin-left:7%;width:93%;margin-top:calc(clamp(40px,6vw,70px)*-1 + clamp(-30px,-4vw,-6px))}
+.f3 .body,.f3 .tab{background:var(--kraft)}.f3 .tab{right:clamp(30px,8vw,110px)}
+.f3 .body{height:clamp(230px,36vw,380px)}
+.sheet{position:absolute;right:-3%;top:50%;width:26%;height:46%;background:var(--old);transform:rotate(4deg);box-shadow:0 5px 12px #0003;z-index:-1}
+body.pulling .folder:not(.pull){opacity:.35;transition:opacity .4s}
+.folder.pull .fin{transform:translateY(-70px) scale(1.05) rotate(-1.5deg);transition-duration:.6s}
+
+/* caso */
+.case{position:fixed;inset:0;z-index:100;background:var(--paper) repeating-linear-gradient(to bottom,transparent 0 47px,var(--line) 47px 48px);overflow-y:auto;transform:translateY(105%) rotate(2deg);transition:transform .8s cubic-bezier(.2,.8,.2,1);visibility:hidden}
+.case.open{transform:none;visibility:visible}
+.case-in{padding:70px clamp(20px,5vw,80px) 100px;max-width:1300px;margin:auto}
+.back{font-family:var(--m);font-size:14px;background:var(--ink);color:var(--paper);border:0;padding:8px 14px;cursor:pointer;position:fixed;top:12px;left:clamp(16px,4vw,48px);z-index:5;transition:transform .2s}
+.back:hover{transform:translateX(-5px)}
+.case h2{font-size:clamp(50px,10vw,150px);margin:8px 0 16px}
+.meta{display:flex;gap:10px 30px;flex-wrap:wrap;margin-bottom:20px}
+.meta span b{background:var(--red);color:#fff;font-weight:400;padding:0 6px}
+.lead{max-width:56ch;font-size:22px;margin-bottom:60px}
+.ev{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:70px 40px;padding:20px 0}
+.item{position:relative;cursor:pointer;background:none;border:0;text-align:left;font:inherit;color:inherit;transform:rotate(var(--r));transition:transform .35s}
+.item:hover,.item:focus-visible{transform:rotate(0) translateY(-10px) scale(1.03);z-index:3}
+.item .pic{position:relative;background:#fff;padding:10px 10px 44px;box-shadow:0 10px 24px #0004}
+.item .pic .ph,.item .pic img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.item .cap{position:absolute;left:14px;bottom:10px;font-family:var(--m);font-size:13px}
+.item .tp{position:absolute;top:-14px;left:50%;width:90px;height:28px;background:#e7dfa8cc;transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 3px #0003}
+.item .no{position:absolute;right:-10px;top:-12px;background:var(--red);color:#fff;font-family:var(--t);font-size:22px;padding:2px 10px;transform:rotate(5deg);z-index:2}
+.item.env .pic{padding-top:60px;background:var(--old)}
+.item .h{position:absolute;right:6px;bottom:-26px;transform:rotate(-3deg)}
+.detail{position:fixed;inset:0;z-index:120;background:#0009;display:grid;place-items:center;padding:16px;opacity:0;visibility:hidden;transition:opacity .35s}
+.detail.open{opacity:1;visibility:visible}
+.dp{background:var(--paper);width:min(1050px,100%);max-height:94vh;overflow:auto;display:grid;grid-template-columns:1.1fr 1fr;gap:0;transform:rotate(-1deg) scale(.95);transition:transform .45s;box-shadow:0 30px 60px #0008}
+.detail.open .dp{transform:none}
+.dp .big{background:#d8d2c4;min-height:300px;display:grid}
+.dp .big img,.dp .big iframe,.dp .big video{width:100%;height:100%;min-height:340px;object-fit:cover;border:0}
+.dp .tx{padding:30px}
+.dp h3{font-size:clamp(36px,5vw,64px);margin:6px 0 20px}
+.dp dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-bottom:18px}
+.dp dt{font-family:var(--m);font-size:13px;background:var(--ink);color:var(--paper);padding:1px 8px;align-self:start}
+.dp p{margin-bottom:12px}
+.x{float:right;font-family:var(--m);background:none;border:1px solid var(--ink);padding:4px 10px;cursor:pointer}
+.x:hover{background:var(--red);color:#fff;border-color:var(--red)}
+@media(max-width:720px){.dp{grid-template-columns:1fr}}
+
+/* contacto */
+.end{min-height:90vh;overflow:hidden}
+.end h2{max-width:none}
+.end .nm{font-size:clamp(28px,5vw,64px);margin-top:50px}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 80px}
+.links a{font-family:var(--m);text-decoration:none;background:var(--old);padding:8px 16px;border:1px solid #0004;box-shadow:3px 3px 0 #0003;transition:transform .2s,box-shadow .2s}
+.links a:hover{transform:translate(-3px,-3px) rotate(-1deg);box-shadow:6px 6px 0 #0004}
+.stamp{position:absolute;right:clamp(10px,8vw,140px);bottom:14vh;border:6px solid var(--red);color:var(--red);font-family:var(--t);font-size:clamp(34px,6vw,80px);padding:6px 22px;transform:rotate(-11deg) scale(2.2);opacity:0;mix-blend-mode:multiply;transition:transform .5s cubic-bezier(.3,1.6,.5,1),opacity .2s;border-radius:6px}
+.stamp.in{opacity:.88;transform:rotate(-11deg) scale(1)}
+.foot{font-family:var(--m);font-size:13px;position:absolute;left:clamp(20px,6vw,100px);bottom:30px}
+
+@media(max-width:720px){body{font-size:17px}.bar nav a:nth-child(n+4){display:none}.stack{opacity:.9;top:auto;bottom:100px;height:42vh;width:62vw}.cover .intro{margin-top:40px;max-width:100%}.hint{bottom:14px}.f2,.f3{margin-left:0;width:100%}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}html{scroll-behavior:auto}.px{transform:rotate(var(--r,0deg))}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<div class="bar">
+  <b>EXPEDIENTE 001</b>
+  <nav><a href="#mecanismo">MECANISMO</a><a href="#evidencias">EVIDENCIAS</a><a href="#archivo">ARCHIVO</a><a href="#contacto">CONTACTO</a></nav>
+</div>
+
+<!-- 01 PORTADA -->
+<header class="cover" id="portada">
+  <div class="tape c2 px" data-s="-.12" style="--r:8deg"><span>EVIDENCE</span><span>EVIDENCE</span><span>EVIDENCE</span></div>
+  <h1>Expediente de investigación visual</h1>
+  <h1 class="who">Investigador: Ignacio Soria<br>Caso: 001 “El Mecanismo”</h1>
+  <p class="intro">Este expediente reúne diferentes piezas producidas a lo largo de una investigación sobre la imagen, el relato y la comunicación. <em>Diferentes casos. Un mismo mecanismo.</em></p>
+
+  <div class="stack px" data-s=".1">
+    <div class="s3 px" data-s=".22" style="--r:3deg"></div>
+    <div class="s2 px" data-s=".18" style="--r:-2deg"></div>
+    <div class="s1 px" data-s=".14" style="--r:2deg"></div>
+    <div class="doc px" data-s="-.05" style="--r:-1.5deg">
+      <span class="m">COMMON SENSE MEDICAL ADVISER</span>
+      <span class="h">“nota de campo — observar primero”</span>
+      <div class="ph">Reemplazá este recuadro por una foto o documento tuyo</div>
+    </div>
+  </div>
+
+  <div class="tape c1 px" data-s=".14" style="--r:-6deg"><span>EVIDENCE</span><span>EVIDENCE</span><span>EVIDENCE</span></div>
+  <div class="hint">SCROLL PARA ABRIR EL EXPEDIENTE <i></i>→</div>
+</header>
+
+<!-- 02 MECANISMO -->
+<section class="sec" id="mecanismo">
+  <p class="m">CASO: 001 &nbsp; ESTADO: ABIERTO</p>
+  <h2 class="t">¿Qué se está investigando?</h2>
+  <div class="mech" id="mech">
+    <svg viewBox="0 0 1000 430" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M80 300 L280 110 L500 280 L720 95 L920 260"/>
+      <path class="red" d="M80 300 L280 110 L500 280 L720 95 L920 260"/>
+    </svg>
+    <div class="node px" data-s=".05" style="left:8%;top:70%;--r:-3deg"><small>FASE 1</small>Observar</div>
+    <div class="node px" data-s="-.04" style="left:28%;top:26%;--r:2deg"><small>FASE 2</small>Investigar</div>
+    <div class="node px" data-s=".06" style="left:50%;top:65%;--r:-2deg"><small>FASE 3</small>Conectar</div>
+    <div class="node px" data-s="-.05" style="left:72%;top:22%;--r:3deg"><small>FASE 4</small>Construir</div>
+    <div class="node last px" data-s=".04" style="left:92%;top:60%;--r:-2deg"><small>RESULTADO</small>Crear</div>
+  </div>
+  <p class="quote">Las piezas cambian. <u>El procedimiento permanece.</u></p>
+  <span class="h note px" data-s=".1" style="left:clamp(20px,6vw,100px);bottom:90px">no es una lista de rubros: es un mismo proceso en distintos medios</span>
+</section>
+
+<!-- 03 ARCHIVO -->
+<section class="sec" id="evidencias">
+  <p class="m">EVIDENCIA RECUPERADA: 3 CARPETAS</p>
+  <h2 class="t">Archivo de casos</h2>
+  <p class="lead" style="max-width:48ch;margin-top:18px">Cada carpeta guarda un caso. Elegí una para abrirla.</p>
+
+  <div class="arch-wrap" id="archivo">
+    <button class="folder f1 px" data-s=".03" data-case="a" aria-label="Abrir Diseño gráfico">
+      <div class="fin"><div class="tab">Diseño<br>gráfico</div><div class="body"><span class="m">CASO 001-A</span></div></div>
+    </button>
+    <button class="folder f2 px" data-s="-.02" data-case="b" aria-label="Abrir Cortometrajes">
+      <div class="fin"><div class="tab">Cortometrajes</div><div class="body"><span class="m">CASO 001-B</span></div></div>
+    </button>
+    <button class="folder f3 px" data-s=".02" data-case="c" aria-label="Abrir Entrevistas">
+      <div class="fin"><div class="sheet"></div><div class="tab">Entrevistas</div><div class="body"><span class="m">CASO 001-C</span><span class="arrow">→</span></div></div>
+    </button>
+  </div>
+</section>
+
+<!-- 04 CONTACTO -->
+<section class="sec end" id="contacto">
+  <p class="m">ÚLTIMA PÁGINA &nbsp; ESTADO: ABIERTO</p>
+  <h2 class="t">Caso abierto</h2>
+  <p class="lead" style="margin-top:18px">Si querés iniciar una nueva investigación, abramos otro expediente.</p>
+  <p class="t nm">Ignacio Soria</p>
+  <p class="m">DISEÑO / AUDIOVISUAL / INVESTIGACIÓN</p>
+  <div class="links">
+    <!-- Reemplazá estos links por los tuyos -->
+    <a href="mailto:tuemail@ejemplo.com">tuemail@ejemplo.com</a>
+    <a href="https://instagram.com/tuusuario" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://behance.net/tuusuario" target="_blank" rel="noopener">Behance</a>
+    <a href="https://vimeo.com/tuusuario" target="_blank" rel="noopener">Vimeo</a>
+  </div>
+  <div class="stamp" id="stamp">Archivo abierto</div>
+  <p class="foot">EXPEDIENTE 001 — CASO “EL MECANISMO”</p>
+</section>
+
+<!-- Caso abierto -->
+<div class="case" id="case" role="dialog" aria-modal="true" aria-label="Caso">
+  <button class="back" id="back">← VOLVER AL ARCHIVO</button>
+  <div class="case-in" id="caseIn"></div>
+</div>
+
+<!-- Detalle de evidencia -->
+<div class="detail" id="detail" role="dialog" aria-modal="true"><div class="dp" id="dp"></div></div>
+
+<script>
+/* ============ EDITÁ ACÁ TU CONTENIDO ============
+   img: ruta de la imagen (ej. "img/poster1.jpg"). Vacío = recuadro de ejemplo.
+   video: link de embed (ej. "https://player.vimeo.com/video/123" o "https://www.youtube.com/embed/ID"). Opcional. */
+const CASES = {
+  a:{code:"001-A",title:"Diseño gráfico",
+     lead:"Posters, piezas gráficas y campañas. Cada pieza es una evidencia: una idea que se construyó a partir de una observación.",
+     style:"photo",
+     items:[
+      {t:"Poster 01",y:"2025",r:"Diseño y dirección de arte",img:"",d:"Descripción breve de la pieza: para quién, qué comunicaba, dónde se usó.",p:"Proceso y concepto: referencias, bocetos, decisiones y cómo se llegó a la imagen final."},
+      {t:"Poster 02",y:"2025",r:"Diseño",img:"",d:"Descripción breve de la pieza.",p:"Proceso y concepto."},
+      {t:"Campaña 01",y:"2024",r:"Diseño y comunicación",img:"",d:"Descripción breve de la campaña.",p:"Proceso y concepto."},
+      {t:"Pieza 04",y:"2024",r:"Diseño",img:"",d:"Descripción breve de la pieza.",p:"Proceso y concepto."}
+     ]},
+  b:{code:"001-B",title:"Cortometrajes",
+     lead:"Cortometrajes dirigidos. Posters, frames, guion y rodaje: el mismo método llevado al relato audiovisual.",
+     style:"photo",
+     items:[
+      {t:"Cortometraje 01",y:"2025",r:"Dirección",img:"",video:"",d:"Sinopsis breve del cortometraje.",p:"Proceso y concepto: guion, rodaje, referencias, montaje."},
+      {t:"Cortometraje 02",y:"2024",r:"Dirección y guion",img:"",video:"",d:"Sinopsis breve del cortometraje.",p:"Proceso y concepto."},
+      {t:"Cortometraje 03",y:"2023",r:"Dirección",img:"",video:"",d:"Sinopsis breve del cortometraje.",p:"Proceso y concepto."}
+     ]},
+  c:{code:"001-C",title:"Entrevistas",
+     lead:"Entrevistas realizadas como pasante en un ciclo de cine. Entrevistar también es investigar.",
+     style:"env",
+     items:[
+      {t:"Entrevista a (nombre)",y:"2025",r:"Entrevistador · ciclo de cine",img:"",d:"Fecha, lugar y tema de la conversación. Link a la grabación si existe.",p:"Fragmento destacado: “escribí acá una cita corta de la entrevista”."},
+      {t:"Entrevista a (nombre)",y:"2025",r:"Entrevistador · ciclo de cine",img:"",d:"Fecha, lugar y tema de la conversación.",p:"Fragmento destacado."},
+      {t:"Entrevista a (nombre)",y:"2025",r:"Entrevistador · ciclo de cine",img:"",d:"Fecha, lugar y tema de la conversación.",p:"Fragmento destacado."}
+     ]}
+};
+const NOTES=["recuperada","revisar","¡conecta!","archivar","clave","ver fondo"];
+/* =============================================== */
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* parallax */
+const px=$$(".px[data-s]");let tick=false,mx=0,my=0;
+function par(){tick=false;const vh=innerHeight;
+  px.forEach(el=>{const p=el.parentElement.getBoundingClientRect();
+    if(p.bottom<-300||p.top>vh+300)return;
+    const d=p.top+p.height/2-vh/2;
+    el.style.setProperty("--py",(d*parseFloat(el.dataset.s)+my*parseFloat(el.dataset.s)*40).toFixed(1)+"px")})}
+function req(){if(!tick&&!reduce){tick=true;requestAnimationFrame(par)}}
+addEventListener("scroll",req,{passive:true});addEventListener("resize",req);
+addEventListener("mousemove",e=>{my=e.clientY/innerHeight-.5;req()});
+par();
+/* cintas: leve vaivén */
+if(!reduce)$$(".tape").forEach((t,i)=>t.animate([{translate:"0 0"},{translate:"8px -4px"},{translate:"0 0"}],{duration:6000+i*1500,iterations:Infinity,easing:"ease-in-out"}));
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.35});
+io.observe($("#mech"));io.observe($("#stamp"));
+
+/* casos */
+let lastFolder=null;
+const caseEl=$("#case"),inner=$("#caseIn"),det=$("#detail"),dp=$("#dp");
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function openCase(k,btn){
+  const c=CASES[k];lastFolder=btn;
+  btn.classList.add("pull");document.body.classList.add("pulling");
+  setTimeout(()=>{
+    inner.innerHTML=`<p class="m">EXPEDIENTE 001 · CASO ${c.code}</p><h2 class="t">${esc(c.title)}</h2>
+    <div class="meta m"><span><b>CASO</b> ${c.code}</span><span><b>EVIDENCIAS</b> ${String(c.items.length).padStart(2,"0")}</span><span><b>ESTADO</b> ABIERTO</span></div>
+    <p class="lead">${esc(c.lead)}</p>
+    <div class="ev">${c.items.map((it,i)=>{const r=((i*37)%7-3)*.9;
+      return `<button class="item ${c.style}" data-i="${i}" style="--r:${r}deg;margin-top:${i%2?30:0}px"><span class="no">${String(i+1).padStart(2,"0")}</span><div class="pic"><span class="tp"></span>${it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen</div>`}<span class="cap">${esc(it.t)} · ${esc(it.y)}</span></div><span class="h">${NOTES[(i+k.charCodeAt(0))%NOTES.length]}</span></button>`}).join("")}</div>`;
+    caseEl.scrollTop=0;caseEl.classList.add("open");document.body.classList.add("lock");
+    inner.querySelectorAll(".item").forEach(b=>b.onclick=()=>openDetail(c,+b.dataset.i,k));
+    $("#back").focus({preventScroll:true});
+  },reduce?0:550);
+}
+function closeCase(){
+  caseEl.classList.remove("open");document.body.classList.remove("lock","pulling");
+  $$(".folder").forEach(f=>f.classList.remove("pull"));
+  if(lastFolder)lastFolder.focus({preventScroll:true});
+}
+function openDetail(c,i,k){
+  const it=c.items[i];
+  const media=it.video?`<iframe src="${esc(it.video)}" allowfullscreen title="${esc(it.t)}"></iframe>`:it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen o video</div>`;
+  dp.innerHTML=`<div class="big">${media}</div><div class="tx"><button class="x" id="xd">CERRAR ✕</button>
+  <p class="m">CASO ${c.code} · EVIDENCIA ${String(i+1).padStart(2,"0")}</p><h3 class="t">${esc(it.t)}</h3>
+  <dl class="m"><dt>AÑO</dt><dd>${esc(it.y)}</dd><dt>ROL</dt><dd>${esc(it.r)}</dd></dl>
+  <p class="m">DESCRIPCIÓN</p><p>${esc(it.d)}</p><p class="m">PROCESO / CONCEPTO</p><p>${esc(it.p)}</p></div>`;
+  det.classList.add("open");$("#xd").focus();$("#xd").onclick=closeDetail;
+}
+function closeDetail(){det.classList.remove("open")}
+$$(".folder").forEach(b=>b.addEventListener("click",()=>openCase(b.dataset.case,b)));
+$("#back").onclick=closeCase;
+det.addEventListener("click",e=>{if(e.target===det)closeDetail()});
+addEventListener("keydown",e=>{if(e.key==="Escape"){det.classList.contains("open")?closeDetail():caseEl.classList.contains("open")&&closeCase()}});
+</script>
+</body>
+</html>
