@@ -130,6 +130,40 @@ body.pulling .folder:not(.pull){opacity:.35;transition:opacity .4s}
 .x:hover{background:var(--red);color:#fff;border-color:var(--red)}
 @media(max-width:720px){.dp{grid-template-columns:1fr}}
 
+
+/* guion + claqueta */
+.ex{margin-top:100px}
+.gf .tab{left:clamp(30px,6vw,80px)}.gf .body,.gf .tab{background:var(--kraft)}.gf .body{height:clamp(90px,14vw,130px)}
+.gf.open .arrow{transform:rotate(90deg)}
+.gs{max-height:0;overflow:hidden;transition:max-height 1s cubic-bezier(.2,.8,.2,1);margin:0 3%}
+.gs.open{max-height:640px}
+.sp{background:#f1ead8;padding:clamp(18px,4vw,44px);max-height:620px;overflow-y:auto;box-shadow:0 12px 26px #0004;font-family:var(--m);font-size:15px;line-height:1.5;transform:rotate(-.4deg)}
+.sp p{margin:0 0 10px}
+.sp .ttl{font-size:clamp(34px,6vw,64px);margin:0}.sp .sub{margin-bottom:10px}
+.sp h4{font:400 14px var(--m);background:var(--ink);color:var(--paper);display:inline-block;padding:1px 8px;margin:26px 0 10px}
+.sp .cue{margin:0 0 0 34%;text-transform:uppercase}.sp .dl{margin-left:20%;max-width:38ch}
+.sp .fin{margin-top:30px;font-size:30px;color:var(--red)}
+.sp a{color:var(--ink);text-decoration-color:var(--red);text-underline-offset:4px}
+.cl{margin:80px auto 0;max-width:860px;text-align:center}
+.clap{display:block;width:min(100%,560px);margin:0 auto;background:none;border:0;cursor:pointer;position:relative;padding-top:50px;font:inherit;color:inherit;outline-offset:8px}
+.arm{position:absolute;top:0;left:0;right:0;height:44px;border:3px solid #0a0a0a;background:repeating-linear-gradient(115deg,#0a0a0a 0 30px,#f6f2f4 30px 60px);transform-origin:0 100%;transform:rotate(-12deg);animation:flap 3s ease-in-out infinite;transition:transform .15s}
+@keyframes flap{0%,58%,100%{transform:rotate(-12deg)}68%{transform:rotate(-2deg)}76%{transform:rotate(-11deg)}82%{transform:rotate(-4deg)}90%{transform:rotate(-12deg)}}
+.clap:hover .arm{animation:none;transform:rotate(-20deg)}
+.clap.on .arm{animation:none;transform:rotate(0)}
+.slate{position:relative;background:#111;color:var(--paper);text-align:left;padding:18px 22px 20px;box-shadow:0 14px 28px #0005;border:3px solid #111}
+.slate .sr{border-bottom:1px solid #fff5;padding:5px 0}.slate .sr b{font-weight:400;opacity:.6;margin-right:10px}
+.slate .go{font-size:clamp(26px,5vw,44px);margin-top:14px}.slate .go span{color:var(--red)}
+.pj{max-height:0;overflow:hidden;transition:max-height 1s ease}.pj.on{max-height:1100px}
+.pbox{position:relative;width:150px;height:60px;background:#2a2723;margin:40px auto 0;border-radius:4px;box-shadow:0 8px 16px #0004}
+.pbox::before,.pbox::after{content:"";position:absolute;top:-26px;width:46px;height:46px;border:6px solid #2a2723;border-radius:50%;background:var(--paper)}
+.pbox::before{left:14px}.pbox::after{left:70px}
+.pbox i{position:absolute;right:-12px;top:20px;width:20px;height:20px;background:#0a0a0a;border-radius:3px}
+.beam{height:90px;width:min(760px,100%);margin:0 auto;background:#fffbe0;opacity:.3;clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);transform:scaleY(0);transform-origin:top;transition:transform .8s .3s}
+.pj.on .beam{transform:scaleY(1)}
+.scr{position:relative;width:min(860px,100%);aspect-ratio:16/9;margin:0 auto;background:#0a0a0a;border:10px solid #e9e6e1;box-shadow:0 20px 40px #0006;opacity:0;transition:opacity .6s 1s}
+.pj.on .scr{opacity:1}.scr iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media(max-width:720px){.sp .cue{margin-left:15%}.sp .dl{margin-left:6%}.sp{font-size:14px}}
+
 /* contacto */
 .end{min-height:90vh;overflow:hidden}
 .end h2{max-width:none}
@@ -228,6 +262,83 @@ body.pulling .folder:not(.pull){opacity:.35;transition:opacity .4s}
   <p class="foot">EXPEDIENTE 001 — CASO “EL MECANISMO”</p>
 </section>
 
+<template id="guionTpl">
+<p class="ttl t">La subasta</p>
+<p class="sub m">Capitulo 1: la Copa</p>
+<h4>Esc. 1 INT. LIVING DIA</h4>
+<p>El muchacho está hablando por teléfono mientras camina por el living.</p>
+<p class="cue">FORTUNATO</p>
+<p class="dl">Acordate que te necesito a las seis. No faltes.</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">Sisi tengo todo. Te veo a las 6.</p>
+<p class="cue">FORTUNATO</p>
+<p class="dl">¿En la subasta?</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">Sí, en la subasta.</p>
+<h4>Esc. 2 INT. SUBASTA. DIA</h4>
+<p>Manos anónimas suben el precio de un producto en una subasta de gala. Hay una vasija, un trofeo y otros artículos; los precios suben aún más. El muchacho compra el trofeo.</p>
+<h4>Esc. 3 INT GALPÓN - DIA</h4>
+<p>El muchacho saca unos negativos del trofeo. Se saca el anillo. Acomoda cajas en el garage. Se apagan las luces. Se rompe la lámpara.</p>
+<p>Ruido de forcejeo. Una persona cae al piso.</p>
+<h4>Esc. 4 INT. DÍA - GALPÓN</h4>
+<p>Un sonido agudo despierta al MUCHACHO (22); hay una luz tenue que ilumina el galpón. Mira para los costados, ve que tiene los brazos amordazados a una silla. Confundido, sacude el cuerpo y escucha una voz cercana.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">¿Se puede saber qué hiciste con los negativos?</p>
+<p>El muchacho lo mira un segundo, la luz molesta sus ojos.</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">¿Qué?</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">Din jævla idiot!</p>
+<p>LLIUDAS (26) le revolea unas fotos que golpean el pecho del MUCHACHO.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">Ese de ahí es Fortunato, ¿qué hace muerto? ¿Si es el hombre que debía llevarse la copa?</p>
+<p>En estas fotos, hay un hombre muerto en el suelo. El muchacho observa detenidamente al muerto. Lliudas se acomoda el cinturón; tiene un arma.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">Fortunato tenía que irse contigo. Lo mataron y te borraste. Es momento de que me digas que Pasó en la subasta.</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">Fortunato…</p>
+<p>El MUCHACHO mira la cara del hombre por unos segundos.</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">¿Lliudas? ¿Sos vos?</p>
+<p>Lliudas se acerca, da la vuelta y ve las manos del MUCHACHO.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">¿Y tu anillo?</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">Escúchame, Fortunato quiso matarme. Es todo lo que recuerdo.</p>
+<p>Lliudas lo mira extrañado, rápidamente se pone frente a él y lo mira a los ojos.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">Te van a matar, ¿Que hiciste? Me decís que tuviste una pelea con Fortunato y ahora los negativos no están.</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">No me acuerdo de nada. Alguien me pegó y se fue con él.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">Jeg kommer til å drepe deg din jævla fitte</p>
+<p>Lliudas le pone una bolsa en la cabeza al muchacho.</p>
+<h4>ESC 5 EXT- DESCAMPADO</h4>
+<p>Un auto frena en una ruta vacía. Ambos bajan del auto. Lliudas lo apunta con el arma. Es interrumpido por una llamada.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">Tenés una última oportunidad para decirme la verdad. Te dieron 24 horas, no me hagas venir a buscarte de nuevo.</p>
+<p>Lliudas sube al auto y lo enciende, se aleja dejando solo al muchacho quien se quita las ataduras y corre tras el vehículo. Camina por la calle, pasa un auto y empieza a hacer dedo.</p>
+<h4>Esc. 6 INT. TARDE LIVING/GALPÓN</h4>
+<p>El muchacho entra a su casa. Cae desplomado al sillón. En la mesa comienza a sonar un teléfono. Contesta.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">¿Mirá qué tardaste 4 horas en llegar? volviste a tu casa… ¿por qué? ¿qué tenés ahí?</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">Quiero acordarme de lo que pasó ayer.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">… ¿no te acordás de nada?</p>
+<p>El muchacho baja al galpón.</p>
+<p class="cue">MUCHACHO</p>
+<p class="dl">Te estoy diciendo que no. Solo un auto alejándose a los pedos.</p>
+<p class="cue">LLIUDAS</p>
+<p class="dl">Para mi te estás haciendo el idiota, me voy a enterar tarde o temprano. Tenés los minutos contados.</p>
+<p>Lliudas apaga el teléfono y carga su arma. El muchacho comienza a revisar y a mover muebles. Descubre un compartimiento secreto. Entra.</p>
+<h4>ESC. 7 INT. NOCHE. LABORATORIO FOTOGRÁFICO</h4>
+<p>El laboratorio tiene luz roja, cuerdas colgando y un goteo constante. Allí, hay una serie de fotos reveladas. El muchacho empieza a descolgarlas. Se detiene ante una copa y bebe. Prende fuego los negativos y las fotos. Sale del laboratorio.</p>
+<h4>Esc. 8 EXT. NOCHE - CALLE FRENTE A LA CASA</h4>
+<p>Lliudas llega a la casa, baja la ventanilla del auto. El fuego se refleja en sus lentes.</p>
+<p class="fin t">Fin</p>
+</template>
+
 <!-- Caso abierto -->
 <div class="case" id="case" role="dialog" aria-modal="true" aria-label="Caso">
   <button class="back" id="back">← VOLVER AL ARCHIVO</button>
@@ -251,12 +362,12 @@ const CASES = {
       {t:"póster tipográfico para instagram: @notsoul____",y:"",r:"",img:"img/Copia-de-diagram-_1_.jpg",d:"",p:""}
      ]},
   b:{code:"001-B",title:"Cortometrajes",
-     lead:"Cortometrajes dirigidos. Posters, frames, guion y rodaje: el mismo método llevado al relato audiovisual.",
+     lead:"Cortometraje realizado en taller de realización audiovisual de la carrera de comunicación. El cual tuve el honor de escribir y de dirigir.",
      style:"photo",
      items:[
-      {t:"Cortometraje 01",y:"2025",r:"Dirección",img:"",video:"",d:"Sinopsis breve del cortometraje.",p:"Proceso y concepto: guion, rodaje, referencias, montaje."},
-      {t:"Cortometraje 02",y:"2024",r:"Dirección y guion",img:"",video:"",d:"Sinopsis breve del cortometraje.",p:"Proceso y concepto."},
-      {t:"Cortometraje 03",y:"2023",r:"Dirección",img:"",video:"",d:"Sinopsis breve del cortometraje.",p:"Proceso y concepto."}
+      {t:"detrás de escena: rodaje",y:"",r:"",img:"img/corto-rodaje.jpg",d:"",p:""},
+      {t:"detrás de escena: laboratorio fotográfico",y:"",r:"",img:"img/corto-laboratorio.jpg",d:"",p:""},
+      {t:"logo del filme: La subasta",y:"",r:"",img:"img/corto-logo.jpg",d:"",p:""}
      ]},
   c:{code:"001-C",title:"Entrevistas",
      lead:"Entrevistas realizadas como pasante en un ciclo de cine. Entrevistar también es investigar.",
@@ -303,13 +414,30 @@ function openCase(k,btn){
     <div class="meta m"><span><b>CASO</b> ${c.code}</span><span><b>EVIDENCIAS</b> ${String(c.items.length).padStart(2,"0")}</span><span><b>ESTADO</b> ABIERTO</span></div>
     <p class="lead">${esc(c.lead)}</p>
     <div class="ev">${c.items.map((it,i)=>{const r=((i*37)%7-3)*.9;
-      return `<button class="item ${c.style}" data-i="${i}" style="--r:${r}deg;margin-top:${i%2?30:0}px"><span class="no">${String(i+1).padStart(2,"0")}</span><div class="pic"><span class="tp"></span>${it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen</div>`}<span class="cap">${esc(it.t)}</span></div><span class="h">${NOTES[(i+k.charCodeAt(0))%NOTES.length]}</span></button>`}).join("")}</div>`;
+      return `<button class="item ${c.style}" data-i="${i}" style="--r:${r}deg;margin-top:${i%2?30:0}px"><span class="no">${String(i+1).padStart(2,"0")}</span><div class="pic"><span class="tp"></span>${it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen</div>`}<span class="cap">${esc(it.t)}</span></div><span class="h">${NOTES[(i+k.charCodeAt(0))%NOTES.length]}</span></button>`}).join("")}</div>${k==="b"?extraB():""}`;
     caseEl.scrollTop=0;caseEl.classList.add("open");document.body.classList.add("lock");
     inner.querySelectorAll(".item").forEach(b=>b.onclick=()=>openDetail(c,+b.dataset.i,k));
+    if(k==="b")wireB();
     $("#back").focus({preventScroll:true});
   },reduce?0:550);
 }
+/*EXTRAS*/
+function extraB(){
+  return `<div class="ex"><button class="folder gf" id="gbtn" aria-expanded="false" aria-label="Abrir el guion"><div class="fin"><div class="tab">Guion</div><div class="body"><span class="m">CASO 001-B · DOCUMENTO</span><span class="arrow">→</span></div></div></button>
+  <div class="gs" id="gs"><div class="sp">${$("#guionTpl").innerHTML}<p class="m"><a href="guion-la-subasta.pdf" download>Descargar guion en PDF</a></p></div></div>
+  <div class="cl"><button class="clap" id="clap" aria-expanded="false" aria-label="Proyectar el cortometraje"><div class="arm"></div>
+  <div class="slate"><div class="sr m"><b>PRODUCCIÓN</b>La subasta</div><div class="sr m"><b>DIRECTOR</b>Ignacio Soria</div><div class="sr m"><b>CAPÍTULO</b>1: la Copa</div><p class="go t">Click para proyectar <span>▶</span></p></div></button>
+  <div class="pj" id="pj"><div class="pbox"><i></i></div><div class="beam"></div><div class="scr" id="scr"></div><p class="m" style="margin-top:14px"><a href="https://www.youtube.com/watch?v=asMGVk0NFVc" target="_blank" rel="noopener">Ver en YouTube</a></p></div></div></div>`}
+function wireB(){
+  const g=$("#gbtn"),gs=$("#gs");
+  g.onclick=()=>{const o=gs.classList.toggle("open");g.classList.toggle("open",o);g.setAttribute("aria-expanded",o)};
+  const cl=$("#clap"),pj=$("#pj"),scr=$("#scr");
+  cl.onclick=()=>{const on=!cl.classList.contains("on");cl.classList.toggle("on",on);cl.setAttribute("aria-expanded",on);pj.classList.toggle("on",on);
+    scr.innerHTML=on?'<iframe src="https://www.youtube.com/embed/asMGVk0NFVc?autoplay=1&rel=0" title="La subasta" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>':"";
+    if(on)setTimeout(()=>pj.scrollIntoView({behavior:"smooth",block:"center"}),450)};
+}
 function closeCase(){
+  const sc=$("#scr");if(sc)sc.innerHTML="";
   caseEl.classList.remove("open");document.body.classList.remove("lock","pulling");
   $$(".folder").forEach(f=>f.classList.remove("pull"));
   if(lastFolder)lastFolder.focus({preventScroll:true});
