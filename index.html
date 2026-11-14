@@ -107,9 +107,10 @@ body.pulling .folder:not(.pull){opacity:.35;transition:opacity .4s}
 .ev{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:70px 40px;padding:20px 0}
 .item{position:relative;cursor:pointer;background:none;border:0;text-align:left;font:inherit;color:inherit;transform:rotate(var(--r));transition:transform .35s}
 .item:hover,.item:focus-visible{transform:rotate(0) translateY(-10px) scale(1.03);z-index:3}
-.item .pic{position:relative;background:#fff;padding:10px 10px 44px;box-shadow:0 10px 24px #0004}
-.item .pic .ph,.item .pic img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
-.item .cap{position:absolute;left:14px;bottom:10px;font-family:var(--m);font-size:13px}
+.item .pic{position:relative;background:#fff;padding:10px 10px 62px;box-shadow:0 10px 24px #0004}
+.item .pic .ph{width:100%;aspect-ratio:4/5;display:block}
+.item .pic img{width:100%;height:auto;display:block}
+.item .cap{position:absolute;left:14px;right:14px;bottom:10px;font-family:var(--m);font-size:12.5px;line-height:1.25}
 .item .tp{position:absolute;top:-14px;left:50%;width:90px;height:28px;background:#e7dfa8cc;transform:translateX(-50%) rotate(-3deg);box-shadow:0 1px 3px #0003}
 .item .no{position:absolute;right:-10px;top:-12px;background:var(--red);color:#fff;font-family:var(--t);font-size:22px;padding:2px 10px;transform:rotate(5deg);z-index:2}
 .item.env .pic{padding-top:60px;background:var(--old)}
@@ -119,9 +120,9 @@ body.pulling .folder:not(.pull){opacity:.35;transition:opacity .4s}
 .dp{background:var(--paper);width:min(1050px,100%);max-height:94vh;overflow:auto;display:grid;grid-template-columns:1.1fr 1fr;gap:0;transform:rotate(-1deg) scale(.95);transition:transform .45s;box-shadow:0 30px 60px #0008}
 .detail.open .dp{transform:none}
 .dp .big{background:#d8d2c4;min-height:300px;display:grid}
-.dp .big img,.dp .big iframe,.dp .big video{width:100%;height:100%;min-height:340px;object-fit:cover;border:0}
+.dp .big img,.dp .big iframe,.dp .big video{width:100%;height:100%;min-height:340px;object-fit:contain;border:0}
 .dp .tx{padding:30px}
-.dp h3{font-size:clamp(36px,5vw,64px);margin:6px 0 20px}
+.dp h3{font-size:clamp(28px,4vw,48px);margin:6px 0 20px}
 .dp dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-bottom:18px}
 .dp dt{font-family:var(--m);font-size:13px;background:var(--ink);color:var(--paper);padding:1px 8px;align-self:start}
 .dp p{margin-bottom:12px}
@@ -190,7 +191,6 @@ body.pulling .folder:not(.pull){opacity:.35;transition:opacity .4s}
     <div class="node last px" data-s=".04" style="left:92%;top:60%;--r:-2deg"><small>RESULTADO</small>Crear</div>
   </div>
   <p class="quote">Las piezas cambian. <u>El procedimiento permanece.</u></p>
-  <span class="h note px" data-s=".1" style="left:clamp(20px,6vw,100px);bottom:90px">no es una lista de rubros: es un mismo proceso en distintos medios</span>
 </section>
 
 <!-- 03 ARCHIVO -->
@@ -220,11 +220,9 @@ body.pulling .folder:not(.pull){opacity:.35;transition:opacity .4s}
   <p class="t nm">Ignacio Soria</p>
   <p class="m">DISEÑO / AUDIOVISUAL / INVESTIGACIÓN</p>
   <div class="links">
-    <!-- Reemplazá estos links por los tuyos -->
-    <a href="mailto:tuemail@ejemplo.com">tuemail@ejemplo.com</a>
-    <a href="https://instagram.com/tuusuario" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://behance.net/tuusuario" target="_blank" rel="noopener">Behance</a>
-    <a href="https://vimeo.com/tuusuario" target="_blank" rel="noopener">Vimeo</a>
+    <a href="mailto:notsoul007@gmail.com">notsoul007@gmail.com</a>
+    <a href="https://www.instagram.com/notsoul____/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.youtube.com/watch?v=asMGVk0NFVc" target="_blank" rel="noopener">Cortometraje</a>
   </div>
   <div class="stamp" id="stamp">Archivo abierto</div>
   <p class="foot">EXPEDIENTE 001 — CASO “EL MECANISMO”</p>
@@ -248,10 +246,9 @@ const CASES = {
      lead:"Posters, piezas gráficas y campañas. Cada pieza es una evidencia: una idea que se construyó a partir de una observación.",
      style:"photo",
      items:[
-      {t:"Poster 01",y:"2025",r:"Diseño y dirección de arte",img:"",d:"Descripción breve de la pieza: para quién, qué comunicaba, dónde se usó.",p:"Proceso y concepto: referencias, bocetos, decisiones y cómo se llegó a la imagen final."},
-      {t:"Poster 02",y:"2025",r:"Diseño",img:"",d:"Descripción breve de la pieza.",p:"Proceso y concepto."},
-      {t:"Campaña 01",y:"2024",r:"Diseño y comunicación",img:"",d:"Descripción breve de la campaña.",p:"Proceso y concepto."},
-      {t:"Pieza 04",y:"2024",r:"Diseño",img:"",d:"Descripción breve de la pieza.",p:"Proceso y concepto."}
+      {t:"diseño de álbum de estudio, 2023",y:"2023",r:"",img:"img/conceptual.jpg",d:"",p:""},
+      {t:"sticker cuya dinámica fue llenar la vía pública",y:"",r:"",img:"img/conceptual2.jpg",d:"",p:""},
+      {t:"póster tipográfico para instagram: @notsoul____",y:"",r:"",img:"img/Copia-de-diagram-_1_.jpg",d:"",p:""}
      ]},
   b:{code:"001-B",title:"Cortometrajes",
      lead:"Cortometrajes dirigidos. Posters, frames, guion y rodaje: el mismo método llevado al relato audiovisual.",
@@ -306,7 +303,7 @@ function openCase(k,btn){
     <div class="meta m"><span><b>CASO</b> ${c.code}</span><span><b>EVIDENCIAS</b> ${String(c.items.length).padStart(2,"0")}</span><span><b>ESTADO</b> ABIERTO</span></div>
     <p class="lead">${esc(c.lead)}</p>
     <div class="ev">${c.items.map((it,i)=>{const r=((i*37)%7-3)*.9;
-      return `<button class="item ${c.style}" data-i="${i}" style="--r:${r}deg;margin-top:${i%2?30:0}px"><span class="no">${String(i+1).padStart(2,"0")}</span><div class="pic"><span class="tp"></span>${it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen</div>`}<span class="cap">${esc(it.t)} · ${esc(it.y)}</span></div><span class="h">${NOTES[(i+k.charCodeAt(0))%NOTES.length]}</span></button>`}).join("")}</div>`;
+      return `<button class="item ${c.style}" data-i="${i}" style="--r:${r}deg;margin-top:${i%2?30:0}px"><span class="no">${String(i+1).padStart(2,"0")}</span><div class="pic"><span class="tp"></span>${it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen</div>`}<span class="cap">${esc(it.t)}</span></div><span class="h">${NOTES[(i+k.charCodeAt(0))%NOTES.length]}</span></button>`}).join("")}</div>`;
     caseEl.scrollTop=0;caseEl.classList.add("open");document.body.classList.add("lock");
     inner.querySelectorAll(".item").forEach(b=>b.onclick=()=>openDetail(c,+b.dataset.i,k));
     $("#back").focus({preventScroll:true});
@@ -322,8 +319,8 @@ function openDetail(c,i,k){
   const media=it.video?`<iframe src="${esc(it.video)}" allowfullscreen title="${esc(it.t)}"></iframe>`:it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen o video</div>`;
   dp.innerHTML=`<div class="big">${media}</div><div class="tx"><button class="x" id="xd">CERRAR ✕</button>
   <p class="m">CASO ${c.code} · EVIDENCIA ${String(i+1).padStart(2,"0")}</p><h3 class="t">${esc(it.t)}</h3>
-  <dl class="m"><dt>AÑO</dt><dd>${esc(it.y)}</dd><dt>ROL</dt><dd>${esc(it.r)}</dd></dl>
-  <p class="m">DESCRIPCIÓN</p><p>${esc(it.d)}</p><p class="m">PROCESO / CONCEPTO</p><p>${esc(it.p)}</p></div>`;
+  ${(it.y||it.r)?`<dl class="m">${it.y?`<dt>AÑO</dt><dd>${esc(it.y)}</dd>`:""}${it.r?`<dt>ROL</dt><dd>${esc(it.r)}</dd>`:""}</dl>`:""}
+  ${it.d?`<p class="m">DESCRIPCIÓN</p><p>${esc(it.d)}</p>`:""}${it.p?`<p class="m">PROCESO / CONCEPTO</p><p>${esc(it.p)}</p>`:""}</div>`;
   det.classList.add("open");$("#xd").focus();$("#xd").onclick=closeDetail;
 }
 function closeDetail(){det.classList.remove("open")}
