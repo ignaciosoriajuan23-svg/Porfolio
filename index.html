@@ -133,6 +133,8 @@ body.pulling .folder:not(.pull){opacity:.35;transition:opacity .4s}
 
 /* guion + claqueta */
 .ex{margin-top:100px}
+.case-in{position:relative}.case-in>*{position:relative;z-index:1}
+.case-in>.cab{position:absolute;top:0;left:0;width:100%;height:1500px;z-index:0;pointer-events:none;opacity:.88}
 .gf .tab{left:clamp(30px,6vw,80px)}.gf .body,.gf .tab{background:var(--kraft)}.gf .body{height:clamp(90px,14vw,130px)}
 .gf.open .arrow{transform:rotate(90deg)}
 .gs{max-height:0;overflow:hidden;transition:max-height 1s cubic-bezier(.2,.8,.2,1);margin:0 3%}
@@ -370,12 +372,12 @@ const CASES = {
       {t:"logo del filme: La subasta",y:"",r:"",img:"img/corto-logo.jpg",d:"",p:""}
      ]},
   c:{code:"001-C",title:"Entrevistas",
-     lead:"Entrevistas realizadas como pasante en un ciclo de cine. Entrevistar también es investigar.",
+     lead:"Entrevistas realizadas en La Nave de los sueños, ciclo de cine en el cual me encuentro realizando una pasantía. Me encargo del contenido de redes, de entrevistar a los invitados y revisar las copias antes de cada proyección.",
      style:"env",
      items:[
-      {t:"Entrevista a (nombre)",y:"2025",r:"Entrevistador · ciclo de cine",img:"",d:"Fecha, lugar y tema de la conversación. Link a la grabación si existe.",p:"Fragmento destacado: “escribí acá una cita corta de la entrevista”."},
-      {t:"Entrevista a (nombre)",y:"2025",r:"Entrevistador · ciclo de cine",img:"",d:"Fecha, lugar y tema de la conversación.",p:"Fragmento destacado."},
-      {t:"Entrevista a (nombre)",y:"2025",r:"Entrevistador · ciclo de cine",img:"",d:"Fecha, lugar y tema de la conversación.",p:"Fragmento destacado."}
+      {t:"conversación con invitados en La Nave de los sueños",y:"",r:"",img:"img/entrevista-panel.jpg",d:"",p:""},
+      {t:"proyección en sala",y:"",r:"",img:"img/entrevista-sala.jpg",d:"",p:""},
+      {t:"entrevista en escena",y:"",r:"",img:"img/entrevista-escena.jpg",d:"",p:""}
      ]}
 };
 const NOTES=["recuperada","revisar","¡conecta!","archivar","clave","ver fondo"];
@@ -410,34 +412,44 @@ function openCase(k,btn){
   const c=CASES[k];lastFolder=btn;
   btn.classList.add("pull");document.body.classList.add("pulling");
   setTimeout(()=>{
-    inner.innerHTML=`<p class="m">EXPEDIENTE 001 · CASO ${c.code}</p><h2 class="t">${esc(c.title)}</h2>
+    inner.innerHTML=`${k==="c"?CABLES:""}<p class="m">EXPEDIENTE 001 · CASO ${c.code}</p><h2 class="t">${esc(c.title)}</h2>
     <div class="meta m"><span><b>CASO</b> ${c.code}</span><span><b>EVIDENCIAS</b> ${String(c.items.length).padStart(2,"0")}</span><span><b>ESTADO</b> ABIERTO</span></div>
     <p class="lead">${esc(c.lead)}</p>
     <div class="ev">${c.items.map((it,i)=>{const r=((i*37)%7-3)*.9;
-      return `<button class="item ${c.style}" data-i="${i}" style="--r:${r}deg;margin-top:${i%2?30:0}px"><span class="no">${String(i+1).padStart(2,"0")}</span><div class="pic"><span class="tp"></span>${it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen</div>`}<span class="cap">${esc(it.t)}</span></div><span class="h">${NOTES[(i+k.charCodeAt(0))%NOTES.length]}</span></button>`}).join("")}</div>${k==="b"?extraB():""}`;
+      return `<button class="item ${c.style}" data-i="${i}" style="--r:${r}deg;margin-top:${i%2?30:0}px"><span class="no">${String(i+1).padStart(2,"0")}</span><div class="pic"><span class="tp"></span>${it.img?`<img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy">`:`<div class="ph">EVIDENCIA ${String(i+1).padStart(2,"0")}<br>agregá tu imagen</div>`}<span class="cap">${esc(it.t)}</span></div><span class="h">${NOTES[(i+k.charCodeAt(0))%NOTES.length]}</span></button>`}).join("")}</div>${k==="b"?extraB():k==="c"?extraC():""}`;
     caseEl.scrollTop=0;caseEl.classList.add("open");document.body.classList.add("lock");
     inner.querySelectorAll(".item").forEach(b=>b.onclick=()=>openDetail(c,+b.dataset.i,k));
-    if(k==="b")wireB();
+    if(k==="b")wireB();if(k==="c")wireProj("c","2DKy8G5VfmY","Entrevista");
     $("#back").focus({preventScroll:true});
   },reduce?0:550);
 }
 /*EXTRAS*/
+const CABLES=`<svg class="cab" viewBox="0 0 1000 1500" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
+<g fill="none" stroke="#0a0a0a" stroke-width="5" stroke-linecap="round"><path d="M1050 30C880 20 700 110 750 250C800 390 980 330 910 220C850 120 650 250 640 420C632 540 660 630 560 700"/><path d="M-50 880C100 830 270 900 230 1030C190 1150 40 1100 100 1000C160 900 350 980 370 1130C385 1250 430 1290 520 1340"/></g>
+<g transform="translate(560 700) rotate(-125)"><rect x="-13" y="-92" width="26" height="92" rx="12" fill="#0a0a0a"/><circle cy="-102" r="27" fill="#2a2723" stroke="#0a0a0a" stroke-width="4"/><path d="M-21-102H21M0-130V-74" stroke="#bdb7ab" stroke-width="2" opacity=".55"/></g>
+<g transform="translate(520 1340) rotate(119)"><rect x="-13" y="-92" width="26" height="92" rx="12" fill="#0a0a0a"/><circle cy="-102" r="27" fill="#2a2723" stroke="#0a0a0a" stroke-width="4"/><path d="M-21-102H21M0-130V-74" stroke="#bdb7ab" stroke-width="2" opacity=".55"/></g></svg>`;
+function proj(k,vid,rows){
+  return `<div class="cl"><button class="clap" id="clap-${k}" aria-expanded="false" aria-label="Proyectar el video"><div class="arm"></div>
+  <div class="slate">${rows.map(r=>`<div class="sr m"><b>${r[0]}</b>${r[1]}</div>`).join("")}<p class="go t">Click para proyectar <span>▶</span></p></div></button>
+  <div class="pj" id="pj-${k}"><div class="pbox"><i></i></div><div class="beam"></div><div class="scr" id="scr-${k}"></div><p class="m" style="margin-top:14px"><a href="https://www.youtube.com/watch?v=${vid}" target="_blank" rel="noopener">Ver en YouTube</a></p></div></div>`}
+function wireProj(k,vid,title){
+  const cl=$("#clap-"+k),pj=$("#pj-"+k),scr=$("#scr-"+k);
+  cl.onclick=()=>{const on=!cl.classList.contains("on");cl.classList.toggle("on",on);cl.setAttribute("aria-expanded",on);pj.classList.toggle("on",on);
+    scr.innerHTML=on?`<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&rel=0" title="${title}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`:"";
+    if(on)setTimeout(()=>pj.scrollIntoView({behavior:"smooth",block:"center"}),450)};
+}
 function extraB(){
   return `<div class="ex"><button class="folder gf" id="gbtn" aria-expanded="false" aria-label="Abrir el guion"><div class="fin"><div class="tab">Guion</div><div class="body"><span class="m">CASO 001-B · DOCUMENTO</span><span class="arrow">→</span></div></div></button>
   <div class="gs" id="gs"><div class="sp">${$("#guionTpl").innerHTML}<p class="m"><a href="guion-la-subasta.pdf" download>Descargar guion en PDF</a></p></div></div>
-  <div class="cl"><button class="clap" id="clap" aria-expanded="false" aria-label="Proyectar el cortometraje"><div class="arm"></div>
-  <div class="slate"><div class="sr m"><b>PRODUCCIÓN</b>La subasta</div><div class="sr m"><b>DIRECTOR</b>Ignacio Soria</div><div class="sr m"><b>CAPÍTULO</b>1: la Copa</div><p class="go t">Click para proyectar <span>▶</span></p></div></button>
-  <div class="pj" id="pj"><div class="pbox"><i></i></div><div class="beam"></div><div class="scr" id="scr"></div><p class="m" style="margin-top:14px"><a href="https://www.youtube.com/watch?v=asMGVk0NFVc" target="_blank" rel="noopener">Ver en YouTube</a></p></div></div></div>`}
+  ${proj("b","asMGVk0NFVc",[["PRODUCCIÓN","La subasta"],["DIRECTOR","Ignacio Soria"],["CAPÍTULO","1: la Copa"]])}</div>`}
 function wireB(){
   const g=$("#gbtn"),gs=$("#gs");
   g.onclick=()=>{const o=gs.classList.toggle("open");g.classList.toggle("open",o);g.setAttribute("aria-expanded",o)};
-  const cl=$("#clap"),pj=$("#pj"),scr=$("#scr");
-  cl.onclick=()=>{const on=!cl.classList.contains("on");cl.classList.toggle("on",on);cl.setAttribute("aria-expanded",on);pj.classList.toggle("on",on);
-    scr.innerHTML=on?'<iframe src="https://www.youtube.com/embed/asMGVk0NFVc?autoplay=1&rel=0" title="La subasta" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>':"";
-    if(on)setTimeout(()=>pj.scrollIntoView({behavior:"smooth",block:"center"}),450)};
+  wireProj("b","asMGVk0NFVc","La subasta");
 }
+function extraC(){return `<div class="ex">${proj("c","2DKy8G5VfmY",[["CICLO","La Nave de los sueños"],["ENTREVISTADOR","Ignacio Soria"],["REGISTRO","Entrevista filmada"]])}</div>`}
 function closeCase(){
-  const sc=$("#scr");if(sc)sc.innerHTML="";
+  $$(".scr").forEach(e=>e.innerHTML="");
   caseEl.classList.remove("open");document.body.classList.remove("lock","pulling");
   $$(".folder").forEach(f=>f.classList.remove("pull"));
   if(lastFolder)lastFolder.focus({preventScroll:true});
